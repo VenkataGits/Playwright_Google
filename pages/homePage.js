@@ -1,3 +1,5 @@
+import {expect} from '@playwright/test'
+
 export class HomePage{
 
     constructor(page){
@@ -12,6 +14,7 @@ export class HomePage{
         this.searchBoxInput = page.getByLabel('Search', { exact: true })
         this.googleSearchButton = page.getByRole('button', { name: 'Google Search' })
         this.iAmFeelingLuckyButton = page.getByRole('button', { name: 'I\'m Feeling Lucky' })
+        this.appsFrame = page.frameLocator("//iframe[@name='app']")
 
     }
 
@@ -35,6 +38,19 @@ export class HomePage{
         await this.appsMemu.click();
     }
 
+    async selectApp(app){
+        const listOfApps = await this.appsFrame.locator("//span[@class='Rq5Gcb']").all()
+
+        for(let i=0; i<listOfApps.length; i++){
+            const text = await listOfApps[i].textContent();
+            if(text.includes(app)){
+                await listOfApps[i].click();
+                break;
+            }
+        }
+
+    }
+
     async clickSignInButton(){
         await this.signInButton.click();
     }
@@ -56,7 +72,7 @@ export class HomePage{
         }
     }
 
-    async clickGoogleSearchButtonn(){
+    async clickGoogleSearchButton(){
         await this.googleSearchButton.click();
     }
 

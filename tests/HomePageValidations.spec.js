@@ -6,6 +6,7 @@ import { GmailPage } from '../pages/gmailPage'
 import { ImagesPage } from '../pages/imagesPage'
 import { SigninPage } from '../pages/signinPage'
 import { SearchPage } from '../pages/searchPage'
+import { MapsPage } from '../pages/mapsPage'
 
 test.beforeEach(async ({page})=>{
     await page.goto('https://www.google.com')
@@ -63,5 +64,15 @@ test("Search box Validation", async ({page})=>{
 
     const searchPage = new SearchPage(page)
     await searchPage.verifySearchBoxText("playwright automation")
+
+})
+
+test("Apps menu Validation", async ({page})=>{
+    const homePage = new HomePage(page)
+    await homePage.clickAppsMemu()
+    await homePage.selectApp("Maps")
+    
+    const mapsPage = new MapsPage(page)
+    await mapsPage.verifySearchMapsInput()
 
 })
