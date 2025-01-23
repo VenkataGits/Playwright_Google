@@ -65,4 +65,3 @@ test("Search box Validation", async ({page})=>{
     await searchPage.verifySearchBoxText("playwright automation")
 
 })
-
