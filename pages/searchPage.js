@@ -9,7 +9,7 @@ export class SearchPage{
 
     async verifySearchBoxText(text){
         const searchText = await this.searchBox.inputValue()
-        await expect(searchText).toEqual(text)
+        expect.soft(searchText).toEqual(text)
     }
 
 }
